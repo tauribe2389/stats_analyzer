@@ -1,0 +1,2 @@
+"""Plotters and figure registry."""
+
