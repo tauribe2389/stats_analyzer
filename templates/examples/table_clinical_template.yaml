@@ -1,0 +1,58 @@
+tables:
+  include_defaults: true
+  defaults:
+    - fit_statistics
+    - adjusted_means
+    - assumption_metrics
+    - validation_summary
+  default_formats:
+    fit_statistics:
+      value: "decimal:5"
+    adjusted_means:
+      adjusted_mean: "decimal:3"
+    assumption_metrics:
+      value: "decimal:4"
+  custom:
+    - id: "validation_status"
+      source: "validation_summary"
+      title: "Validation Status"
+      columns:
+        - validation
+        - passed
+        - flag_count
+        - summary
+      rename:
+        validation: "Validation Step"
+        passed: "Passed"
+        flag_count: "Flag Count"
+        summary: "Summary"
+      format:
+        Flag Count: "integer"
+      include_in_pdf: true
+    - id: "dataset_missingness_focus"
+      source: "dataset"
+      title: "Rows With Missing Core Covariates"
+      columns:
+        - subject_id
+        - treatment
+        - region
+        - age
+        - baseline
+        - outcome
+      query: "age != age or baseline != baseline"
+      rename:
+        subject_id: "Subject ID"
+        treatment: "Treatment"
+        region: "Region"
+        age: "Age"
+        baseline: "Baseline"
+        outcome: "Outcome"
+      format:
+        Age: "decimal:1"
+        Baseline: "decimal:2"
+        Outcome: "decimal:2"
+      include_in_pdf: true
+  preview_rows: 20
+  pdf_max_rows: 20
+  pdf_max_columns: 8
+

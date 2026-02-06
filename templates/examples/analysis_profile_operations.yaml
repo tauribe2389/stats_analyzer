@@ -1,0 +1,24 @@
+profile_name: manufacturing_anova
+description: ANOVA profile comparing process changes by shift and plant.
+input: sample_data/examples/manufacturing_anova.csv
+output_dir: output/example_runs/manufacturing_anova
+response: quality_score
+primary_factor: process
+covariates: []
+group_vars:
+  - shift
+  - plant
+id_vars:
+  - batch_id
+analysis_type: anova
+alpha: 0.05
+validation_alpha: 0.05
+assumption_alpha: 0.05
+min_total_n: 50
+min_n_per_factor: 3
+min_n_per_group: 6
+cov_type: HC3
+validation_mode: univariate
+categorical_validation_mode: both
+report_template: templates/examples/report_operations_template.yaml
+table_config: templates/examples/table_operations_template.yaml

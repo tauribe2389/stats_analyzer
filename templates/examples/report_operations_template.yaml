@@ -1,0 +1,53 @@
+title: "Manufacturing Process ANOVA Report"
+subtitle: "Example profile: process and shift quality comparison"
+sections:
+  - executive_summary
+  - data_quality
+  - validation
+  - modeling
+  - assumptions
+  - tables
+  - figures
+include_flag_table: true
+include_assumption_notes: true
+tables:
+  include_defaults: true
+  defaults:
+    - flags
+    - fit_statistics
+    - parameter_estimates
+    - adjusted_means
+    - assumption_metrics
+  default_formats:
+    fit_statistics:
+      value: "decimal:4"
+    adjusted_means:
+      adjusted_mean: "decimal:2"
+  custom:
+    - id: "quality_focus_rows"
+      source: "dataset"
+      title: "Low Quality Batches"
+      columns:
+        - batch_id
+        - process
+        - shift
+        - plant
+        - quality_score
+      query: "quality_score <= 75"
+      sort_by:
+        - quality_score
+      ascending: true
+      limit: 40
+      rename:
+        batch_id: "Batch ID"
+        process: "Process"
+        shift: "Shift"
+        plant: "Plant"
+        quality_score: "Quality Score"
+      format:
+        Quality Score: "decimal:2"
+      include_in_pdf: true
+  preview_rows: 20
+  pdf_max_rows: 20
+  pdf_max_columns: 8
+

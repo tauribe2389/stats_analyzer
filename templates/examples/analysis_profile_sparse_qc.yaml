@@ -1,0 +1,24 @@
+profile_name: sparse_group_qc
+description: Demonstration profile that intentionally triggers sparse-group validation flags.
+input: sample_data/examples/sparse_groups_demo.csv
+output_dir: output/example_runs/sparse_group_qc
+response: score
+primary_factor: cohort
+covariates: []
+group_vars:
+  - site
+id_vars:
+  - id
+analysis_type: anova
+alpha: 0.05
+validation_alpha: 0.05
+assumption_alpha: 0.05
+min_total_n: 20
+min_n_per_factor: 6
+min_n_per_group: 8
+cov_type: HC3
+validation_mode: univariate
+categorical_validation_mode: both
+report_template: templates/examples/report_sparse_qc_template.yaml
+table_config: templates/examples/table_sparse_qc_template.yaml
+
