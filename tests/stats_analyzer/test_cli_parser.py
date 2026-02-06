@@ -20,6 +20,8 @@ def test_parse_run_all_command() -> None:
             "site",
             "--id-vars",
             "subject_id",
+            "--assumption-scope",
+            "both",
         ]
     )
 
@@ -30,6 +32,7 @@ def test_parse_run_all_command() -> None:
     assert args.covariates == ["age", "baseline"]
     assert args.group_vars == ["site"]
     assert args.id_vars == ["subject_id"]
+    assert args.assumption_scope == "both"
 
 
 def test_parse_explain_flag() -> None:
@@ -72,5 +75,6 @@ def test_parser_defaults_include_thresholds_and_covariance() -> None:
     assert args.cov_type == "HC3"
     assert args.validation_mode == "univariate"
     assert args.categorical_validation_mode == "both"
+    assert args.assumption_scope == "global"
     assert args.table_config is None
     assert args.no_tables is False

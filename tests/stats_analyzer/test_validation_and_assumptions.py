@@ -133,3 +133,36 @@ def test_assumption_checker_reports_metrics_for_fitted_model() -> None:
     assert "jarque_bera_pvalue" in assumption_result.metrics or "normality_check_failed" in codes
     assert "breusch_pagan_lm_pvalue" in assumption_result.metrics or "homoscedasticity_check_failed" in codes
     assert "durbin_watson" in assumption_result.metrics or "independence_check_failed" in codes
+
+
+def test_assumption_checker_supports_group_scope_metrics() -> None:
+    rng = np.random.default_rng(21)
+    rows = []
+    for i in range(120):
+        arm = "A" if i % 2 == 0 else "B"
+        site = "North" if i % 3 == 0 else "South"
+        x = rng.normal(0, 1)
+        noise = rng.normal(0, 0.8 if arm == "A" else 1.1)
+        y = 8 + (1.0 if arm == "B" else 0.0) + (0.4 if site == "North" else -0.3) + 1.7 * x + noise
+        rows.append({"y": y, "arm": arm, "site": site, "x": x})
+    dataset = pd.DataFrame(rows)
+
+    spec = ModelSpec(
+        analysis_type="ancova",
+        response="y",
+        primary_factor="arm",
+        covariates=["x"],
+        group_variables=["site"],
+        min_total_n=30,
+        min_n_per_factor=2,
+        min_n_per_group=2,
+        assumption_scope="group",
+    )
+
+    model_result = AncovaModelRunner().run(dataset, spec)
+    assumption_result = AssumptionChecker().run(dataset, spec, model_result)
+
+    assert assumption_result.metrics["assumption_scope"] == "group"
+    assert assumption_result.metrics["assumption_grouping_columns"] == ["arm", "site"]
+    assert assumption_result.metrics["group_assumption_group_count"] == 4
+    assert len(assumption_result.metrics["group_assumption_metrics"]) == 4

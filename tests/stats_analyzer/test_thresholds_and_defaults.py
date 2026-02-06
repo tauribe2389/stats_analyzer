@@ -23,6 +23,7 @@ def test_model_selector_uses_validation_alpha_fallback() -> None:
     assert spec.covariance_type == "HC3"
     assert spec.min_n_per_group == 3
     assert spec.categorical_validation_mode == "both"
+    assert spec.assumption_scope == "global"
 
 
 def test_adjusted_mean_extrapolation_flags_detect_out_of_range_and_unobserved_stratum() -> None:
