@@ -1,0 +1,26 @@
+Subject ID,Treatment Arm,Site,Observed Outcome
+S004,B,North,96.29
+S005,C,South,99.97
+S007,B,South,86.36
+S008,C,North,99.52
+S010,B,North,94.14
+S011,C,South,89.22
+S012,A,North,91.81
+S014,C,North,101.71
+S016,B,North,96.42
+S017,C,South,92.69
+S020,C,North,93.24
+S022,B,North,98.33
+S023,C,South,88.68
+S025,B,South,87.73
+S026,C,North,91.48
+S029,C,South,88.58
+S030,A,North,89.92
+S034,B,North,88.82
+S035,C,South,90.50
+S040,B,North,99.61
+S041,C,South,89.42
+S042,A,North,95.25
+S046,B,North,91.92
+S047,C,South,117.50
+S050,C,North,100.81

@@ -1,0 +1,6 @@
+Subject ID,Treatment,Region,Age,Baseline,Outcome
+CT0084,DoseHigh,South,44.5,,90.70
+CT0124,DoseLow,South,56.1,,78.32
+CT0193,DoseLow,West,,128.29,96.03
+CT0198,DoseHigh,South,,134.29,112.55
+CT0225,DoseHigh,West,57.9,,91.04

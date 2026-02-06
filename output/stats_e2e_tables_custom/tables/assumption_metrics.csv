@@ -1,0 +1,17 @@
+metric,value
+observation_count,120.0
+assumption_alpha,0.05
+jarque_bera_stat,1.0829023672989395
+jarque_bera_pvalue,0.5819031909563471
+residual_skew,-0.16559217619317249
+residual_kurtosis,3.329723220554572
+breusch_pagan_lm_stat,7.235424836800874
+breusch_pagan_lm_pvalue,0.20371196937085384
+breusch_pagan_f_stat,1.4630807755760382
+breusch_pagan_f_pvalue,0.20748942894411798
+ramsey_reset_stat,0.0028297461504224325
+ramsey_reset_pvalue,0.9576710209004211
+durbin_watson,2.2684723118946764
+cooks_distance_threshold,0.03361344537815126
+high_cooks_distance_count,7.0
+condition_number,1055.6822528866044

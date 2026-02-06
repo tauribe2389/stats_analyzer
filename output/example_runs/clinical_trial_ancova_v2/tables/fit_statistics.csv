@@ -1,0 +1,7 @@
+metric,value
+r_squared,0.67348
+adj_r_squared,0.66489
+aic,1426.16144
+bic,1450.37854
+n_obs,235.00000
+covariance_type,HC3

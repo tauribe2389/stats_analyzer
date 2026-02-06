@@ -1,0 +1,6 @@
+Severity,Stage,Code,Recommendation
+ERROR,categorical-validation,insufficient_n_per_factor_level,Review sparse levels: C
+ERROR,categorical-validation,insufficient_n_group_factor_stratum,Collapse sparse strata or increase sample size in underrepresented cells.
+WARN,categorical-validation,categorical_joint_autocorrelation_signal,Review dependence structure and ordering assumptions.
+WARN,categorical-validation,categorical_joint_weak_signal,Check whether this term is still required by design intent.
+WARN,categorical-validation,categorical_joint_weak_signal,Check whether this term is still required by design intent.

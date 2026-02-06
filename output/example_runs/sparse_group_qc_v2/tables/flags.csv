@@ -1,0 +1,6 @@
+code,message,severity,stage,variables,recommendation
+insufficient_n_per_factor_level,Some levels in 'cohort' have fewer than 6 observations.,ERROR,categorical-validation,['cohort'],Review sparse levels: C
+insufficient_n_group_factor_stratum,"Some group/factor strata are below minimum N per factor (6): [X, C]=3, [Y, B]=2, [Y, C]=1",ERROR,categorical-validation,"['cohort', 'site']",Collapse sparse strata or increase sample size in underrepresented cells.
+categorical_joint_autocorrelation_signal,"Joint categorical model Durbin-Watson is 2.65, outside [1.5, 2.5].",WARN,categorical-validation,[],Review dependence structure and ordering assumptions.
+categorical_joint_weak_signal,"Categorical term 'C(site)' is weak in joint model (p=0.555, alpha=0.05).",WARN,categorical-validation,['C(site)'],Check whether this term is still required by design intent.
+categorical_joint_weak_signal,"Categorical term 'C(cohort):C(site)' is weak in joint model (p=0.3229, alpha=0.05).",WARN,categorical-validation,['C(cohort):C(site)'],Check whether this term is still required by design intent.

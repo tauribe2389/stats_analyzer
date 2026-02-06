@@ -1,0 +1,17 @@
+metric,value
+observation_count,240.0000
+assumption_alpha,0.0500
+jarque_bera_stat,2157.5658
+jarque_bera_pvalue,0.0000
+residual_skew,2.1325
+residual_kurtosis,17.2182
+breusch_pagan_lm_stat,6.1062
+breusch_pagan_lm_pvalue,0.4114
+breusch_pagan_f_stat,1.0137
+breusch_pagan_f_pvalue,0.4171
+ramsey_reset_stat,0.2213
+ramsey_reset_pvalue,0.6385
+durbin_watson,1.7754
+cooks_distance_threshold,0.0170
+high_cooks_distance_count,8.0000
+condition_number,1057.2220
