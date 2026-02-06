@@ -1,0 +1,7 @@
+code,message,severity,stage,variables,recommendation
+missing_values,Column 'baseline' has 1 missing values.,WARN,health,['baseline'],Set explicit missing value policy before final reporting.
+categorical_joint_condition_high,Joint categorical model condition number is high (1092.3).,WARN,categorical-validation,[],Inspect collinearity and sparse categorical combinations.
+categorical_joint_weak_signal,"Categorical term 'C(treatment):C(site)' is weak in joint model (p=0.266, alpha=0.05).",WARN,categorical-validation,['C(treatment):C(site)'],Check whether this term is still required by design intent.
+covariate_missing_values,Covariate 'baseline' has 1 missing values.,WARN,covariate-validation,['baseline'],
+influential_observations_detected,7 observations exceed Cook's distance threshold 0.03361.,WARN,assumptions,[],Inspect influence diagnostics and assess sensitivity to outliers.
+high_condition_number,Model condition number is high (1055.7).,WARN,assumptions,[],Inspect collinearity and sparse design cells.

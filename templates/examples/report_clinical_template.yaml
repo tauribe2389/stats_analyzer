@@ -1,0 +1,74 @@
+title: "Clinical Trial ANCOVA Report"
+subtitle: "Example profile: adjusted treatment comparison by region"
+sections:
+  - executive_summary
+  - data_quality
+  - validation
+  - modeling
+  - assumptions
+  - tables
+  - figures
+include_flag_table: true
+include_assumption_notes: true
+tables:
+  include_defaults: true
+  defaults:
+    - flags
+    - fit_statistics
+    - parameter_estimates
+    - adjusted_means
+    - assumption_metrics
+  default_formats:
+    fit_statistics:
+      value: "decimal:5"
+    assumption_metrics:
+      value: "decimal:4"
+  custom:
+    - id: "warn_or_error_flags"
+      source: "flags"
+      title: "Warnings and Errors"
+      query: "severity != 'INFO'"
+      columns:
+        - severity
+        - stage
+        - code
+        - message
+      rename:
+        severity: "Severity"
+        stage: "Stage"
+        code: "Flag Code"
+        message: "Message"
+      include_in_pdf: true
+    - id: "high_outcome_subjects"
+      source: "dataset"
+      title: "High Outcome Subjects"
+      columns:
+        - subject_id
+        - treatment
+        - region
+        - sex
+        - age
+        - baseline
+        - outcome
+      query: "outcome >= 90"
+      sort_by:
+        - outcome
+      ascending: false
+      limit: 30
+      rename:
+        subject_id: "Subject ID"
+        treatment: "Treatment Arm"
+        region: "Region"
+        sex: "Sex"
+        age: "Age (Years)"
+        baseline: "Baseline Score"
+        outcome: "Outcome Score"
+      format:
+        Age (Years): "decimal:1"
+        Baseline Score: "decimal:2"
+        Outcome Score: "decimal:2"
+      include_in_pdf: true
+  preview_rows: 20
+  pdf_max_rows: 20
+  pdf_max_columns: 8
+

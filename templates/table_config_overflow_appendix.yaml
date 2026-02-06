@@ -1,0 +1,65 @@
+tables:
+  include_defaults: true
+  defaults:
+    - flags
+    - fit_statistics
+    - adjusted_means
+    - assumption_metrics
+  custom:
+    - id: "validation_status"
+      source: "validation_summary"
+      title: "Validation Status Summary"
+      columns:
+        - validation
+        - passed
+        - flag_count
+        - summary
+      rename:
+        validation: "Validation Step"
+        passed: "Passed"
+        flag_count: "Flag Count"
+        summary: "Summary"
+      format:
+        Flag Count: "integer"
+      include_in_pdf: true
+    - id: "high_outcome_subjects"
+      source: "dataset"
+      title: "High Outcome Subjects"
+      columns:
+        - subject_id
+        - treatment
+        - site
+        - outcome
+      query: "outcome >= 85"
+      sort_by:
+        - outcome
+      ascending: false
+      limit: 25
+      rename:
+        subject_id: "Subject ID"
+        treatment: "Treatment Arm"
+        site: "Site"
+        outcome: "Observed Outcome"
+      format:
+        Observed Outcome:
+          type: decimal
+          decimals: 2
+      include_in_pdf: true
+  default_formats:
+    fit_statistics:
+      value: "decimal:5"
+    assumption_metrics:
+      value:
+        type: decimal
+        decimals: 4
+  preview_rows: 20
+  pdf_max_rows: 20
+  pdf_max_columns: 8
+  pdf_overflow_mode: auto
+  pdf_overflow_placement: appendix
+  pdf_truncate_chars: 80
+  pdf_min_col_width: 52
+  pdf_min_col_width_truncated: 32
+  pdf_max_col_width: 240
+  pdf_split_key_columns: 1
+  pdf_split_orientation: auto

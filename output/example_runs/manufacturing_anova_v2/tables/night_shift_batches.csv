@@ -1,0 +1,26 @@
+Batch ID,Process,Shift,Plant,Quality Score
+MF0002,Legacy,Night,Plant1,73.78
+MF0003,Legacy,Night,Plant2,72.57
+MF0008,UpgradeB,Night,Plant1,73.08
+MF0013,UpgradeA,Night,Plant2,84.82
+MF0015,UpgradeB,Night,Plant2,79.02
+MF0016,UpgradeB,Night,Plant1,76.43
+MF0020,UpgradeA,Night,Plant2,79.50
+MF0024,UpgradeA,Night,Plant2,73.43
+MF0029,Legacy,Night,Plant1,70.34
+MF0034,UpgradeA,Night,Plant2,74.77
+MF0036,UpgradeA,Night,Plant1,77.72
+MF0040,Legacy,Night,Plant2,75.42
+MF0042,Legacy,Night,Plant1,75.24
+MF0043,UpgradeB,Night,Plant1,82.66
+MF0051,UpgradeB,Night,Plant2,82.67
+MF0055,UpgradeB,Night,Plant1,82.46
+MF0056,UpgradeA,Night,Plant2,72.75
+MF0059,UpgradeB,Night,Plant2,75.04
+MF0060,UpgradeB,Night,Plant1,83.54
+MF0061,UpgradeA,Night,Plant1,80.44
+MF0065,UpgradeB,Night,Plant1,83.81
+MF0067,Legacy,Night,Plant2,74.53
+MF0074,UpgradeA,Night,Plant1,83.71
+MF0077,UpgradeB,Night,Plant1,74.27
+MF0081,UpgradeB,Night,Plant1,80.77

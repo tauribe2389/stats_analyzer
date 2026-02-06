@@ -1,0 +1,6 @@
+Validation Step,Passed,Flag Count,Summary
+health,True,1,Health checks completed.
+categorical,True,2,Categorical validation completed.
+covariate,True,0,Covariate validation completed.
+identify_variables,True,0,Identify variable validation completed.
+assumptions,True,1,Assumption checks completed.

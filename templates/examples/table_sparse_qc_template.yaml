@@ -1,0 +1,27 @@
+tables:
+  include_defaults: true
+  defaults:
+    - flags
+    - validation_summary
+  default_formats:
+    validation_summary:
+      flag_count: "integer"
+  custom:
+    - id: "flag_rollup"
+      source: "flags"
+      title: "All Flags Rollup"
+      columns:
+        - severity
+        - stage
+        - code
+        - recommendation
+      rename:
+        severity: "Severity"
+        stage: "Stage"
+        code: "Code"
+        recommendation: "Recommendation"
+      include_in_pdf: true
+  preview_rows: 20
+  pdf_max_rows: 20
+  pdf_max_columns: 8
+

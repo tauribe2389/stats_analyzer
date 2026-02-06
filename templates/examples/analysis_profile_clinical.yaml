@@ -1,0 +1,26 @@
+profile_name: clinical_trial_ancova
+description: ANCOVA-focused run with treatment effect adjustment by age/baseline.
+input: sample_data/examples/clinical_trial_ancova.csv
+output_dir: output/example_runs/clinical_trial_ancova
+response: outcome
+primary_factor: treatment
+covariates:
+  - age
+  - baseline
+group_vars:
+  - region
+id_vars:
+  - subject_id
+analysis_type: ancova
+alpha: 0.05
+validation_alpha: 0.05
+assumption_alpha: 0.05
+min_total_n: 60
+min_n_per_factor: 5
+min_n_per_group: 10
+cov_type: HC3
+validation_mode: joint
+categorical_validation_mode: both
+report_template: templates/examples/report_clinical_template.yaml
+table_config: templates/examples/table_clinical_template.yaml
+

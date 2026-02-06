@@ -1,0 +1,7 @@
+code,message,severity,stage,variables,recommendation
+missing_values,Column 'quality_score' has 2 missing values.,WARN,health,['quality_score'],Set explicit missing value policy before final reporting.
+categorical_joint_rank_deficient,"Joint categorical model is rank-deficient (rank=6, columns=12).",ERROR,categorical-validation,[],Remove redundant terms or collapse categorical levels.
+categorical_joint_condition_high,Joint categorical model condition number is high (9.905e+33).,WARN,categorical-validation,[],Inspect collinearity and sparse categorical combinations.
+categorical_joint_weak_signal,"Categorical term 'C(process)' is weak in joint model (p=1, alpha=0.05).",WARN,categorical-validation,['C(process)'],Check whether this term is still required by design intent.
+categorical_joint_weak_signal,"Categorical term 'C(shift)' is weak in joint model (p=1, alpha=0.05).",WARN,categorical-validation,['C(shift)'],Check whether this term is still required by design intent.
+categorical_joint_weak_signal,"Categorical term 'C(process):C(plant)' is weak in joint model (p=0.1537, alpha=0.05).",WARN,categorical-validation,['C(process):C(plant)'],Check whether this term is still required by design intent.

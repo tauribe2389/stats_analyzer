@@ -1,0 +1,56 @@
+tables:
+  include_defaults: true
+  defaults:
+    - fit_statistics
+    - parameter_estimates
+    - adjusted_means
+    - flags
+  default_formats:
+    fit_statistics:
+      value: "decimal:4"
+    adjusted_means:
+      adjusted_mean: "decimal:3"
+  custom:
+    - id: "validation_rollup"
+      source: "validation_summary"
+      title: "Validation Rollup"
+      columns:
+        - validation
+        - passed
+        - flag_count
+        - summary
+      rename:
+        validation: "Validation Step"
+        passed: "Passed"
+        flag_count: "Flag Count"
+        summary: "Summary"
+      format:
+        Flag Count: "integer"
+      include_in_pdf: true
+    - id: "night_shift_batches"
+      source: "dataset"
+      title: "Night Shift Batches"
+      columns:
+        - batch_id
+        - process
+        - shift
+        - plant
+        - quality_score
+      query: "shift == 'Night'"
+      sort_by:
+        - quality_score
+      ascending: false
+      limit: 25
+      rename:
+        batch_id: "Batch ID"
+        process: "Process"
+        shift: "Shift"
+        plant: "Plant"
+        quality_score: "Quality Score"
+      format:
+        Quality Score: "decimal:2"
+      include_in_pdf: true
+  preview_rows: 20
+  pdf_max_rows: 20
+  pdf_max_columns: 8
+

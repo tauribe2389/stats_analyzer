@@ -1,0 +1,53 @@
+title: "Sparse Group Validation QC Report"
+subtitle: "Example profile: validation-heavy run with expected blocking errors"
+sections:
+  - executive_summary
+  - data_quality
+  - validation
+  - assumptions
+  - tables
+include_flag_table: true
+include_assumption_notes: true
+tables:
+  include_defaults: true
+  defaults:
+    - flags
+    - validation_summary
+  default_formats: {}
+  custom:
+    - id: "error_flags_only"
+      source: "flags"
+      title: "Error Flags Only"
+      query: "severity == 'ERROR'"
+      columns:
+        - severity
+        - stage
+        - code
+        - message
+      rename:
+        severity: "Severity"
+        stage: "Stage"
+        code: "Flag Code"
+        message: "Message"
+      include_in_pdf: true
+    - id: "sparse_cohort_rows"
+      source: "dataset"
+      title: "Sparse Cohort Rows"
+      query: "cohort == 'C'"
+      columns:
+        - id
+        - cohort
+        - site
+        - score
+      rename:
+        id: "Record ID"
+        cohort: "Cohort"
+        site: "Site"
+        score: "Score"
+      format:
+        Score: "decimal:2"
+      include_in_pdf: true
+  preview_rows: 20
+  pdf_max_rows: 20
+  pdf_max_columns: 8
+

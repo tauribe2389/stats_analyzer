@@ -1,0 +1,308 @@
+sdk_version: 1
+name: stats_analyzer_template_sdk
+description: >
+  Reference dictionary for report/template inputs supported by stats-analyzer.
+  Use this when constructing report templates and table configs.
+
+report_template:
+  top_level:
+    title:
+      type: string
+      default: "Statistical Analysis Report"
+      description: Report title shown on the first page.
+    subtitle:
+      type: string
+      default: "ANOVA / ANCOVA workflow output"
+      description: Optional subtitle shown below title.
+    sections:
+      type: list[string]
+      default:
+        - executive_summary
+        - data_quality
+        - validation
+        - modeling
+        - assumptions
+        - tables
+        - figures
+      allowed_examples:
+        - executive_summary
+        - data_quality
+        - validation
+        - modeling
+        - assumptions
+        - tables
+        - figures
+      description: >
+        High-level section intent. Current renderer always outputs available figures;
+        table section is shown when table artifacts exist.
+    include_flag_table:
+      type: boolean
+      default: true
+      description: Include a flags table in PDF.
+    include_assumption_notes:
+      type: boolean
+      default: true
+      description: Reserved metadata flag; currently not directly used by renderer logic.
+    tables:
+      type: object
+      description: Table generation and PDF table preview behavior.
+
+tables:
+  config_fields:
+    include_defaults:
+      type: boolean
+      default: true
+      description: Emit built-in default tables.
+    defaults:
+      type: list[string]
+      default:
+        - flags
+        - fit_statistics
+        - parameter_estimates
+        - adjusted_means
+        - assumption_metrics
+      description: Which default tables to emit when include_defaults=true.
+    custom:
+      type: list[object]
+      default: []
+      description: Custom table specs.
+    default_formats:
+      type: object
+      default: {}
+      description: >
+        Per-default-table format mapping. Keys are table ids; values are
+        column->format rule maps.
+    preview_rows:
+      type: integer
+      default: 20
+      description: Number of rows saved into table artifact preview (used by PDF previews).
+    pdf_max_rows:
+      type: integer
+      default: 20
+      description: Max rows shown per table in PDF.
+    pdf_max_columns:
+      type: integer
+      default: 8
+      description: Max columns shown per table in PDF.
+    pdf_overflow_mode:
+      type: enum
+      values: [auto, portrait, landscape, split]
+      default: auto
+      description: >
+        Overflow strategy for PDF tables. auto = width budgeting/wrap, truncation fallback,
+        then landscape, then split.
+    pdf_overflow_placement:
+      type: enum
+      values: [inline, appendix]
+      default: inline
+      description: >
+        inline renders overflow tables in-place; appendix moves overflowed tables
+        to "Wide Tables Appendix".
+    pdf_truncate_chars:
+      type: integer
+      default: 80
+      description: Max characters per cell before truncation fallback in PDF.
+    pdf_min_col_width:
+      type: number
+      default: 52
+      description: Minimum column width for initial width budgeting.
+    pdf_min_col_width_truncated:
+      type: number
+      default: 32
+      description: Minimum column width after truncation fallback.
+    pdf_max_col_width:
+      type: number
+      default: 240
+      description: Maximum width cap per column before proportional shrinking.
+    pdf_split_key_columns:
+      type: integer
+      default: 1
+      description: Number of left-most columns repeated across split table parts.
+    pdf_split_orientation:
+      type: enum
+      values: [auto, portrait, landscape]
+      default: auto
+      description: Page orientation used for split-table parts.
+
+  default_table_ids:
+    flags:
+      description: All pipeline/model/reporting flags.
+      source: run_result.flags
+    fit_statistics:
+      description: Model fit statistics (metric/value rows).
+      source: run_result.model.fit_statistics
+    parameter_estimates:
+      description: Model parameter table from statsmodels summary.
+      source: run_result.model.parameter_table
+    adjusted_means:
+      description: Adjusted means rows emitted by modeling stage.
+      source: run_result.model.adjusted_means
+    assumption_metrics:
+      description: Assumption check metrics (metric/value rows).
+      source: run_result.assumption_validation.metrics
+    dataset_preview:
+      description: First 25 dataset rows.
+      source: dataset.head(25)
+
+  custom_table_spec:
+    id:
+      type: string
+      required: true
+      description: Unique table id; normalized to lowercase snake-like id.
+    source:
+      type: string
+      required: true
+      description: Data source key. See table_sources.
+    title:
+      type: string
+      required: false
+      description: Display title in PDF (defaults to id title-case).
+    query:
+      type: string
+      required: false
+      description: pandas.DataFrame.query expression.
+    columns:
+      type: list[string]
+      required: false
+      description: Keep/order specific columns.
+    rename:
+      type: object
+      required: false
+      description: Mapping original_column -> display_column.
+    sort_by:
+      type: string|list[string]
+      required: false
+      description: Sort columns (if present after query/select/rename).
+    ascending:
+      type: boolean|list[boolean]
+      required: false
+      default: true
+      description: Sort direction(s) for sort_by.
+    limit:
+      type: integer
+      required: false
+      description: Keep first N rows.
+    include_in_pdf:
+      type: boolean
+      required: false
+      default: true
+      description: Whether this table appears in PDF sections.
+    format:
+      type: object
+      required: false
+      description: Column formatting map (column_name -> format rule).
+
+table_sources:
+  dataset:
+    aliases: [original_dataset, raw_dataset]
+    columns: [all dataset columns]
+    description: Raw loaded dataset.
+  flags:
+    aliases: [all_flags]
+    columns: [code, message, severity, stage, variables, recommendation]
+    description: All flags emitted during the run.
+  adjusted_means:
+    aliases: [model_adjusted_means]
+    columns: [model-dependent]
+    description: Adjusted means rows from model result.
+  parameter_estimates:
+    aliases: [model_parameter_table]
+    columns: [model-dependent]
+    description: Model parameter estimates table.
+  fit_statistics:
+    aliases: [model_fit_statistics]
+    columns: [metric, value]
+    description: Model fit stats flattened into metric/value rows.
+  assumption_metrics:
+    aliases: [assumptions]
+    columns: [metric, value]
+    description: Flattened assumption-validation metrics.
+  health_metrics:
+    aliases: [health_validation_metrics]
+    columns: [metric, value]
+    description: Flattened data-health metrics.
+  categorical_metrics:
+    aliases: [categorical_validation_metrics]
+    columns: [metric, value]
+    description: Flattened categorical-validation metrics.
+  covariate_metrics:
+    aliases: [covariate_validation_metrics]
+    columns: [metric, value]
+    description: Flattened covariate-validation metrics.
+  identify_variable_metrics:
+    aliases: [identify_variables_metrics, id_variable_metrics, id_vars_metrics]
+    columns: [metric, value]
+    description: Flattened identify-variable-validation metrics.
+  validation_metrics:
+    aliases: [all_validation_metrics]
+    columns: [validation, metric, value]
+    description: Flattened metrics across all validation stages.
+  validations:
+    aliases: [validation_summary]
+    columns: [validation, passed, summary, flag_count]
+    description: One status row per validation stage.
+  figures:
+    aliases: [figure_artifacts]
+    columns: [figure_id, path, title, section, tags]
+    description: Figure artifact metadata rows.
+
+format_rules:
+  string_short_form:
+    examples:
+      - decimal:2
+      - percent:1
+      - integer
+      - scientific:3
+      - string
+  dict_form:
+    fields:
+      type:
+        values: [decimal, percent, integer, scientific, string, pattern]
+      decimals:
+        type: integer
+        description: Decimal places for decimal/percent/scientific.
+      thousands:
+        type: boolean
+        description: Enable thousands separator where numeric format supports it.
+      multiply_by_100:
+        type: boolean
+        description: Percent mode scaling toggle (default true).
+      prefix:
+        type: string
+        description: Prefix text for formatted numeric output.
+      suffix:
+        type: string
+        description: Suffix text for formatted numeric output.
+      null:
+        type: string
+        description: Replacement text for null/NaN.
+      pattern:
+        type: string
+        description: Python format pattern for pattern mode.
+
+figures:
+  template_controls:
+    sections:
+      note: >
+        Include "figures" in sections for intent/readability; figure artifacts are
+        rendered when plots were generated and artifacts exist.
+    per_figure_controls:
+      supported: false
+      note: No template-level per-figure include/exclude settings currently.
+  built_in_artifacts:
+    diagnostic_residuals:
+      figure_id: diagnostic_residuals
+      output_file: diagnostic_residuals.png
+      section: assumptions
+      description: Residuals vs fitted diagnostic plot.
+    comparison_observed_vs_model:
+      figure_id: comparison_observed_vs_model
+      output_file: comparison_observed_vs_model.png
+      section: figures
+      description: Observed vs model-predicted scatter with identity line.
+
+runtime_notes:
+  - "Use --template for report-template YAML path."
+  - "Use --table-config for table-spec YAML path."
+  - "If --table-config is omitted, --template is reused for table settings."
+  - "If reportlab is unavailable, PDF is skipped but table/figure artifacts still generate."

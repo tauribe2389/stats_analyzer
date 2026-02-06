@@ -1,0 +1,8 @@
+code,message,severity,stage,variables,recommendation
+missing_values,Column 'quality_score' has 2 missing values.,WARN,health,['quality_score'],Set explicit missing value policy before final reporting.
+categorical_joint_weak_signal,"Categorical term 'C(process):C(shift)' is weak in joint model (p=0.05728, alpha=0.05).",WARN,categorical-validation,['C(process):C(shift)'],Check whether this term is still required by design intent.
+categorical_joint_weak_signal,"Categorical term 'C(process):C(plant)' is weak in joint model (p=0.1507, alpha=0.05).",WARN,categorical-validation,['C(process):C(plant)'],Check whether this term is still required by design intent.
+adjusted_mean_unobserved_stratum,"Adjusted-mean row is based on a categorical stratum not present in data: process=Legacy, shift=None, plant=None",WARN,modeling,"['process', 'shift', 'plant']",Confirm this stratification is intended or add data in that stratum.
+adjusted_mean_unobserved_stratum,"Adjusted-mean row is based on a categorical stratum not present in data: process=UpgradeA, shift=None, plant=None",WARN,modeling,"['process', 'shift', 'plant']",Confirm this stratification is intended or add data in that stratum.
+adjusted_mean_unobserved_stratum,"Adjusted-mean row is based on a categorical stratum not present in data: process=UpgradeB, shift=None, plant=None",WARN,modeling,"['process', 'shift', 'plant']",Confirm this stratification is intended or add data in that stratum.
+influential_observations_detected,10 observations exceed Cook's distance threshold 0.02247.,WARN,assumptions,[],Inspect influence diagnostics and assess sensitivity to outliers.
