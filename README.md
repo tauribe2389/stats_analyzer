@@ -1,20 +1,3 @@
-# Atlas Workspace
-This repository contains two Python applications:
-1. Atlas local portfolio manager (existing web app).
-2. `stats-analyzer` CLI package for statistical validation/modeling/reporting workflows.
-
-## Atlas App (Existing)
-Run locally:
-
-```bash
-python app.py
-# open http://127.0.0.1:5000
-```
-
-Notes:
-- Migrations are in `migrations/` and applied on startup via `migrate.run_migrations()`.
-- SQLite file: `data.db`.
-- Specs are in `spec/`.
 
 ## Stats Analyzer (CLI)
 `stats-analyzer` ingests tabular data and executes:
